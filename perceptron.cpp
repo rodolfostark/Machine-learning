@@ -5,6 +5,7 @@ using namespace std;
 int main()
 {
     int x[4][3] = {{0, 0, 1}, {1, 1, 0}, {0, 0, 1}, {1, 1, 0}};//entradas para treinar a rede
+    int x1[4][3] = {{1, 1, 1}, {0, 0, 0}, {1, 0, 0}, {0, 1, 1}};//entradas para testar a rede
     int d[4] = {-1, 1, -1, 1}; //valores desejados para cada padrão de entradas
     float w[3] = {0.4,-0.6,0.6};
     float limiar = 0.5;
@@ -34,5 +35,23 @@ int main()
         }
         limiar = limiar + (-1)*n*(d[i] - y);
     }
+    cout << "Testando a rede: " << endl;
+     for(int i = 0;i < 4;i++){
+        cout << "---pesos---" << endl;
+        cout << "w0 = " << w[0] << ", w1 = " << w[1] << ", w2 = " << w[2] << endl;
+        cout << "---entradas---" << endl;
+        cout << x1[i][0] << " , " << x1[i][1] << " , " << x1[i][2]<< endl;
+        u = w[0]*x1[i][0] + w[1]*x1[i][1] + w[2]*x1[i][2] + -limiar;
+        cout << "u = " << u << endl;
+        cout << "limiar = " << limiar << endl;
+        if(u >= 0){
+            y = 1;
+            cout << "Saída: y = " << y << endl;
+        }
+        else if (u < 0) {
+            y = -1;
+            cout << "Saída: y = " << y << endl;
+        }
+     }
     return 0;
 }
